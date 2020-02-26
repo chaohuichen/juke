@@ -9,7 +9,6 @@ function AllAlbums(props) {
           <AlbumRow
             key={album.id}
             album={album} //data
-            // selectAlbum={props.selectAlbum} //function
           />
         )
       })}

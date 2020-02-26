@@ -7,7 +7,6 @@ const DisconnectAlbumRow = props => {
     <div
       className="album"
       onClick={() => {
-        console.log('clicked', props.getAlbum)
         props.getAlbum(props.album.id)
       }}
     >

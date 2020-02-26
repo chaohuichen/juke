@@ -5,7 +5,7 @@ import SideBar from './Sidebar'
 import Player from './Player'
 import SingleAlbum from './SingleAlbums'
 import {connect} from 'react-redux'
-import {fetchAlbums, fetchAlbum} from '../store'
+import {fetchAlbums, removeAlbum} from '../store'
 
 const audio = document.createElement('audio')
 
@@ -13,7 +13,6 @@ class DisconnectMain extends React.Component {
   constructor() {
     super()
     this.state = {
-      // selectedAlbum: {},
       currentSong: {},
       isPlaying: false
     }
@@ -59,27 +58,18 @@ class DisconnectMain extends React.Component {
     }
   }
   componentDidMount() {
-    console.log('fetching albums')
     this.props.getAlbums()
-    console.log('after fetching')
   }
 
   selectAlbum(albumId) {
-    // const response = await axios.get(`/api/Albums/${albumId}`)
-    // const selectedAlbum = response.data
-
-    // this.setState({selectedAlbum})
     this.props.getAlbum(albumId)
   }
   homeScreen() {
-    // this.setState({selectedAlbum: {}})
+    this.props.resetAlbum()
   }
 
   render() {
     const {albums, selectedAlbum} = this.props
-
-    // const {albums} = this.props.getAlbums()
-    // console.log('the albums from store', this.props)
     return (
       <div id="main" className="row container">
         <SideBar homeFunc={this.homeScreen} />
@@ -96,7 +86,6 @@ class DisconnectMain extends React.Component {
           ) : (
             <AllAlbums
               allAlbum={albums} //state
-              // selectAlbum={this.selectAlbum} //function
             />
           )}
         </div>
@@ -112,7 +101,8 @@ class DisconnectMain extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getAlbums: () => dispatch(fetchAlbums())
+    getAlbums: () => dispatch(fetchAlbums()),
+    resetAlbum: () => dispatch(removeAlbum())
   }
 }
 const mapStateToProps = state => {
