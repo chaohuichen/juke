@@ -6,6 +6,7 @@ import Player from './Player'
 import SingleAlbum from './SingleAlbums'
 import {connect} from 'react-redux'
 import {fetchAlbums, removeAlbum} from '../store'
+import {Link} from 'react-router-dom'
 
 const audio = document.createElement('audio')
 
